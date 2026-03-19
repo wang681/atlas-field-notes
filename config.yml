@@ -1,0 +1,76 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "Create {{collection}}: {{slug}}"
+    update: "Update {{collection}}: {{slug}}"
+    delete: "Delete {{collection}}: {{slug}}"
+
+media_folder: "static/images"
+public_folder: "/images"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    delete: true
+    editor:
+      preview: true
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Category", name: "category", widget: "select", options: ["Life Skills", "Money Skills"], required: true}
+      - {label: "Description", name: "description", widget: "text", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime", required: true}
+      - {label: "Reading Time", name: "readingTime", widget: "string", default: "5 min"}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["published", "draft", "archived"], default: "draft"}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
+
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    delete: true
+    editor:
+      preview: true
+    fields:
+      - {label: "Product Name", name: "name", widget: "string", required: true}
+      - {label: "Category", name: "category", widget: "select", options: ["Outdoor Essentials", "Home Utility", "Tools"], required: true}
+      - {label: "Description", name: "description", widget: "text", required: true}
+      - {label: "Price Range", name: "price", widget: "string", default: "USD 0.00 - 0.00 / unit (EXW)"}
+      - {label: "MOQ", name: "moq", widget: "string", default: "100 units"}
+      - {label: "Product Image", name: "image", widget: "image", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["active", "discontinued", "coming_soon"], default: "active"}
+      - {label: "Details", name: "body", widget: "markdown", required: true}
+
+  - name: "pages"
+    label: "Pages"
+    folder: "content/pages"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Path", name: "path", widget: "string", required: true}
+      - {label: "Status", name: "status", widget: "select", options: ["published", "draft"], default: "published"}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
+
+  - name: "settings"
+    label: "Site Settings"
+    folder: "content/settings"
+    create: false
+    delete: false
+    editor:
+      preview: false
+    fields:
+      - {label: "Site Title", name: "site_title", widget: "string", default: "Atlas Field Notes"}
+      - {label: "Site Description", name: "site_description", widget: "text"}
+      - {label: "Article Categories", name: "article_categories", widget: "list", default: ["Life Skills", "Money Skills"]}
+      - {label: "Product Categories", name: "product_categories", widget: "list", default: ["Outdoor Essentials", "Home Utility", "Tools"]}
+      - {label: "Contact Email", name: "contact_email", widget: "string"}
+      - {label: "Social Links", name: "social_links", widget: "list", required: false}
